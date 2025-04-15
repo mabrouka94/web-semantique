@@ -1,0 +1,61 @@
+# Lister tous les départements avec leur nom et téléphone
+PREFIX h: <http://example.org/hospital#>
+
+SELECT ?dept ?name ?phone
+WHERE {
+  ?dept a h:Department ;
+        h:departmentName ?name ;
+        h:departmentPhone ?phone .
+}
+#Trouver les noms des docteurs avec leur spécialité
+PREFIX h: <http://example.org/hospital#>
+
+SELECT ?doctor ?name ?speciality
+WHERE {
+  ?doctor a h:Doctor ;
+          h:doctorName ?name ;
+          h:speciality ?speciality .
+}
+#Lister tous les patients assignés à un lit
+PREFIX h: <http://example.org/hospital#>
+
+SELECT ?patient ?name ?bed
+WHERE {
+  ?patient a h:Patient ;
+           h:patientName ?name ;
+           h:bedTo ?bedTo .
+  ?bedTo h:assignedBed ?bed .
+}
+#Trouver les docteurs travaillant dans un département spécifique
+PREFIX h: <http://example.org/hospital#>
+
+SELECT ?doctor ?name
+WHERE {
+  ?doctor a h:Doctor ;
+          h:doctorName ?name ;
+          h:worksIn h:Dept1 .
+}
+#Lister tous les lits dans une chambre spécifique
+PREFIX h: <http://example.org/hospital#>
+
+SELECT ?bed
+WHERE {
+  ?room a h:Room ;
+        h:roomID "Wing1Ward1Room1" ;
+        h:hasBeds ?beds .
+  ?beds h:hasBed ?bed .
+}
+# Afficher les mises à jour médicales pour un patient donné
+PREFIX h: <http://example.org/hospital#>
+
+SELECT ?updateDate ?updateTime ?doctor ?comments
+WHERE {
+  ?record a h:Record ;
+          h:affiliatedPatient h:Patient1 ;
+          h:hasHistoryUpdate ?update .
+  ?update h:updateDate ?updateDate ;
+          h:updateTime ?updateTime ;
+          h:affiliatedDoctor ?doctor ;
+          h:doctorComments ?comments .
+}
+
