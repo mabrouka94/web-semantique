@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:ex="http://example.org/hospital#">
+
+  <!-- Classes -->
+  <rdfs:Class rdf:about="ex:Hospital"/>
+  <rdfs:Class rdf:about="ex:Infrastructure"/>
+  <rdfs:Class rdf:about="ex:Wing"/>
+  <rdfs:Class rdf:about="ex:Department"/>
+  <rdfs:Class rdf:about="ex:Ward"/>
+  <rdfs:Class rdf:about="ex:Room"/>
+  <rdfs:Class rdf:about="ex:Bed"/>
+  <rdfs:Class rdf:about="ex:Staff"/>
+  <rdfs:Class rdf:about="ex:Doctor"/>
+  <rdfs:Class rdf:about="ex:Nurse"/>
+  <rdfs:Class rdf:about="ex:Patient"/>
+  <rdfs:Class rdf:about="ex:History"/>
+  <rdfs:Class rdf:about="ex:Record"/>
+
+  <!-- Properties (object) -->
+  <rdf:Property rdf:about="ex:hasInfrastructure">
+    <rdfs:domain rdf:resource="ex:Hospital"/>
+    <rdfs:range rdf:resource="ex:Infrastructure"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:hasWing">
+    <rdfs:domain rdf:resource="ex:Infrastructure"/>
+    <rdfs:range rdf:resource="ex:Wing"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:hasDepartment">
+    <rdfs:domain rdf:resource="ex:Wing"/>
+    <rdfs:range rdf:resource="ex:Department"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:hasWard">
+    <rdfs:domain rdf:resource="ex:Wing"/>
+    <rdfs:range rdf:resource="ex:Ward"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:hasRoom">
+    <rdfs:domain rdf:resource="ex:Ward"/>
+    <rdfs:range rdf:resource="ex:Room"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:hasBed">
+    <rdfs:domain rdf:resource="ex:Room"/>
+    <rdfs:range rdf:resource="ex:Bed"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:hasDoctor">
+    <rdfs:domain rdf:resource="ex:Staff"/>
+    <rdfs:range rdf:resource="ex:Doctor"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:hasNurse">
+    <rdfs:domain rdf:resource="ex:Staff"/>
+    <rdfs:range rdf:resource="ex:Nurse"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:attendsDepartment">
+    <rdfs:domain rdf:resource="ex:Patient"/>
+    <rdfs:range rdf:resource="ex:Department"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:attendedByDoctor">
+    <rdfs:domain rdf:resource="ex:Patient"/>
+    <rdfs:range rdf:resource="ex:Doctor"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:assignedBed">
+    <rdfs:domain rdf:resource="ex:Patient"/>
+    <rdfs:range rdf:resource="ex:Bed"/>
+  </rdf:Property>
+
+  <!-- Properties (datatype) -->
+  <rdf:Property rdf:about="ex:roomSize">
+    <rdfs:domain rdf:resource="ex:Room"/>
+    <rdfs:range rdf:resource="rdfs:Literal"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:bedSize">
+    <rdfs:domain rdf:resource="ex:Bed"/>
+    <rdfs:range rdf:resource="rdfs:Literal"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:doctorName">
+    <rdfs:domain rdf:resource="ex:Doctor"/>
+    <rdfs:range rdf:resource="rdfs:Literal"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:patientName">
+    <rdfs:domain rdf:resource="ex:Patient"/>
+    <rdfs:range rdf:resource="rdfs:Literal"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="ex:patientAge">
+    <rdfs:domain rdf:resource="ex:Patient"/>
+    <rdfs:range rdf:resource="rdfs:Literal"/>
+  </rdf:Property>
+
+</rdf:RDF>
