@@ -1,61 +1,62 @@
 # Lister tous les départements avec leur nom et téléphone
-PREFIX h: <http://example.org/hospital#>
+PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
 
-SELECT ?dept ?name ?phone
+SELECT ?dept ?nom ?telephone
 WHERE {
-  ?dept a h:Department ;
-        h:departmentName ?name ;
-        h:departmentPhone ?phone .
+  ?dept a h:Departement ;
+        h:nom ?nom ;
+        h:telephone ?telephone .
 }
-#Trouver les noms des docteurs avec leur spécialité
-PREFIX h: <http://example.org/hospital#>
 
-SELECT ?doctor ?name ?speciality
+# Trouver les noms des médecins avec leur spécialité
+PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
+
+SELECT ?medecin ?nOm ?specialité
 WHERE {
-  ?doctor a h:Doctor ;
-          h:doctorName ?name ;
-          h:speciality ?speciality .
+  ?medecin a h:Médecin ;
+          h:nOm ?nOm ;
+          h:specialité ?specialité .
 }
-#Lister tous les patients assignés à un lit
-PREFIX h: <http://example.org/hospital#>
 
-SELECT ?patient ?name ?bed
+# Lister tous les patients assignés à un lit
+PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
+
+SELECT ?patient ?NoM ?lit
 WHERE {
   ?patient a h:Patient ;
-           h:patientName ?name ;
-           h:bedTo ?bedTo .
-  ?bedTo h:assignedBed ?bed .
+           h:NoM ?NoM ;
+           h:assigné ?lit .
 }
-#Trouver les docteurs travaillant dans un département spécifique
-PREFIX h: <http://example.org/hospital#>
 
-SELECT ?doctor ?name
-WHERE {
-  ?doctor a h:Doctor ;
-          h:doctorName ?name ;
-          h:worksIn h:Dept1 .
-}
-#Lister tous les lits dans une chambre spécifique
-PREFIX h: <http://example.org/hospital#>
+# Trouver les médecins travaillant dans un service spécifique
+PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
 
-SELECT ?bed
+SELECT ?medecin ?nOm
 WHERE {
-  ?room a h:Room ;
-        h:roomID "Wing1Ward1Room1" ;
-        h:hasBeds ?beds .
-  ?beds h:hasBed ?bed .
+  ?medecin a h:Médecin ;
+          h:nOm ?nOm ;
+          h:travailleDans h:Urgences .
 }
+
+# Lister tous les lits dans une chambre spécifique
+PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
+
+SELECT ?lit
+WHERE {
+  ?chambre a h:Chambre ;
+        h:numéro "121" ;
+        h:aLit ?lit .
+}
+
 # Afficher les mises à jour médicales pour un patient donné
-PREFIX h: <http://example.org/hospital#>
+PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
 
-SELECT ?updateDate ?updateTime ?doctor ?comments
+SELECT ?datemaj ?medecin ?commentaires
 WHERE {
-  ?record a h:Record ;
-          h:affiliatedPatient h:Patient1 ;
-          h:hasHistoryUpdate ?update .
-  ?update h:updateDate ?updateDate ;
-          h:updateTime ?updateTime ;
-          h:affiliatedDoctor ?doctor ;
-          h:doctorComments ?comments .
+  ?dossier a h:Dossiermédical ;
+          h:àdossier h:patient1 ;
+          h:Amiseajour ?maj .
+  ?maj h:datemaj ?datemaj ;
+          h:commentaires ?commentaires ;
+          h:affiliatedDoctor ?medecin .
 }
-
