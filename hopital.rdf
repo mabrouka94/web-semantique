@@ -1,103 +1,129 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+<rdf:RDF xmlns="http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-         xmlns:ex="http://example.org/hospital#">
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 
   <!-- Classes -->
-  <rdfs:Class rdf:about="ex:Hospital"/>
-  <rdfs:Class rdf:about="ex:Infrastructure"/>
-  <rdfs:Class rdf:about="ex:Wing"/>
-  <rdfs:Class rdf:about="ex:Department"/>
-  <rdfs:Class rdf:about="ex:Ward"/>
-  <rdfs:Class rdf:about="ex:Room"/>
-  <rdfs:Class rdf:about="ex:Bed"/>
-  <rdfs:Class rdf:about="ex:Staff"/>
-  <rdfs:Class rdf:about="ex:Doctor"/>
-  <rdfs:Class rdf:about="ex:Nurse"/>
-  <rdfs:Class rdf:about="ex:Patient"/>
-  <rdfs:Class rdf:about="ex:History"/>
-  <rdfs:Class rdf:about="ex:Record"/>
+  <owl:Class rdf:about="#Hopital"/>
+  <owl:Class rdf:about="#Aile"/>
+  <owl:Class rdf:about="#Departement"/>
+  <owl:Class rdf:about="#Service_hospitalier"/>
+  <owl:Class rdf:about="#Chambre"/>
+  <owl:Class rdf:about="#Lit"/>
+  <owl:Class rdf:about="#Personne"/>
+  <owl:Class rdf:about="#Médecin"/>
+  <owl:Class rdf:about="#Patient"/>
+  <owl:Class rdf:about="#Dossiermédical"/>
+  <owl:Class rdf:about="#Miseajour"/>
+  <owl:Class rdf:about="#Listes_des_lits"/>
 
-  <!-- Properties (object) -->
-  <rdf:Property rdf:about="ex:hasInfrastructure">
-    <rdfs:domain rdf:resource="ex:Hospital"/>
-    <rdfs:range rdf:resource="ex:Infrastructure"/>
-  </rdf:Property>
+  <!-- Object Properties -->
+  <owl:ObjectProperty rdf:about="#possédeAile">
+    <rdfs:domain rdf:resource="#Hopital"/>
+    <rdfs:range rdf:resource="#Aile"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:hasWing">
-    <rdfs:domain rdf:resource="ex:Infrastructure"/>
-    <rdfs:range rdf:resource="ex:Wing"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#aservice">
+    <rdfs:domain rdf:resource="#Aile"/>
+    <rdfs:range rdf:resource="#Service_hospitalier"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:hasDepartment">
-    <rdfs:domain rdf:resource="ex:Wing"/>
-    <rdfs:range rdf:resource="ex:Department"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#contientchambre">
+    <rdfs:domain rdf:resource="#Service_hospitalier"/>
+    <rdfs:range rdf:resource="#Chambre"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:hasWard">
-    <rdfs:domain rdf:resource="ex:Wing"/>
-    <rdfs:range rdf:resource="ex:Ward"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#aLit">
+    <rdfs:domain rdf:resource="#Chambre"/>
+    <rdfs:range rdf:resource="#Lit"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:hasRoom">
-    <rdfs:domain rdf:resource="ex:Ward"/>
-    <rdfs:range rdf:resource="ex:Room"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#travailleDans">
+    <rdfs:domain rdf:resource="#Médecin"/>
+    <rdfs:range rdf:resource="#Service_hospitalier"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:hasBed">
-    <rdfs:domain rdf:resource="ex:Room"/>
-    <rdfs:range rdf:resource="ex:Bed"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#suit">
+    <rdfs:domain rdf:resource="#Médecin"/>
+    <rdfs:range rdf:resource="#Patient"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:hasDoctor">
-    <rdfs:domain rdf:resource="ex:Staff"/>
-    <rdfs:range rdf:resource="ex:Doctor"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#assigné">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="#Lit"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:hasNurse">
-    <rdfs:domain rdf:resource="ex:Staff"/>
-    <rdfs:range rdf:resource="ex:Nurse"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#àdossier">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="#Dossiermédical"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:attendsDepartment">
-    <rdfs:domain rdf:resource="ex:Patient"/>
-    <rdfs:range rdf:resource="ex:Department"/>
-  </rdf:Property>
+  <owl:ObjectProperty rdf:about="#Amiseajour">
+    <rdfs:domain rdf:resource="#Dossiermédical"/>
+    <rdfs:range rdf:resource="#Miseajour"/>
+  </owl:ObjectProperty>
 
-  <rdf:Property rdf:about="ex:attendedByDoctor">
-    <rdfs:domain rdf:resource="ex:Patient"/>
-    <rdfs:range rdf:resource="ex:Doctor"/>
-  </rdf:Property>
+  <!-- Data Properties -->
+  <owl:DatatypeProperty rdf:about="#Nom">
+    <rdfs:domain rdf:resource="#Hopital"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
 
-  <rdf:Property rdf:about="ex:assignedBed">
-    <rdfs:domain rdf:resource="ex:Patient"/>
-    <rdfs:range rdf:resource="ex:Bed"/>
-  </rdf:Property>
+  <owl:DatatypeProperty rdf:about="#NOM">
+    <rdfs:domain rdf:resource="#Aile"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
 
-  <!-- Properties (datatype) -->
-  <rdf:Property rdf:about="ex:roomSize">
-    <rdfs:domain rdf:resource="ex:Room"/>
-    <rdfs:range rdf:resource="rdfs:Literal"/>
-  </rdf:Property>
+  <owl:DatatypeProperty rdf:about="#nom">
+    <rdfs:domain rdf:resource="#Service_hospitalier"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
 
-  <rdf:Property rdf:about="ex:bedSize">
-    <rdfs:domain rdf:resource="ex:Bed"/>
-    <rdfs:range rdf:resource="rdfs:Literal"/>
-  </rdf:Property>
+  <owl:DatatypeProperty rdf:about="#numéro">
+    <rdfs:domain rdf:resource="#Chambre"/>
+    <rdfs:range rdf:resource="xsd:integer"/>
+  </owl:DatatypeProperty>
 
-  <rdf:Property rdf:about="ex:doctorName">
-    <rdfs:domain rdf:resource="ex:Doctor"/>
-    <rdfs:range rdf:resource="rdfs:Literal"/>
-  </rdf:Property>
+  <owl:DatatypeProperty rdf:about="#numérealit">
+    <rdfs:domain rdf:resource="#Lit"/>
+    <rdfs:range rdf:resource="xsd:integer"/>
+  </owl:DatatypeProperty>
 
-  <rdf:Property rdf:about="ex:patientName">
-    <rdfs:domain rdf:resource="ex:Patient"/>
-    <rdfs:range rdf:resource="rdfs:Literal"/>
-  </rdf:Property>
+  <owl:DatatypeProperty rdf:about="#nOm">
+    <rdfs:domain rdf:resource="#Médecin"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
 
-  <rdf:Property rdf:about="ex:patientAge">
-    <rdfs:domain rdf:resource="ex:Patient"/>
-    <rdfs:range rdf:resource="rdfs:Literal"/>
-  </rdf:Property>
+  <owl:DatatypeProperty rdf:about="#specialité">
+    <rdfs:domain rdf:resource="#Médecin"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#NoM">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#dataadmission">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="xsd:dateTime"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#iddossier">
+    <rdfs:domain rdf:resource="#Dossiermédical"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#datemaj">
+    <rdfs:domain rdf:resource="#Miseajour"/>
+    <rdfs:range rdf:resource="xsd:dateTime"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#commentaires">
+    <rdfs:domain rdf:resource="#Miseajour"/>
+    <rdfs:range rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
 
 </rdf:RDF>
