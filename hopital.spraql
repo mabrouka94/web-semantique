@@ -1,13 +1,17 @@
-# Lister tous les départements avec leur nom et téléphone
+Trouver les chambres contenues dans le service 'Urgences'
 PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
 
-SELECT ?dept ?nom ?telephone
-WHERE {
-  ?dept a h:Departement ;
-        h:nom ?nom ;
-        h:telephone ?telephone .
-}
 
+SELECT ?chambre
+WHERE {
+  :Urgences :contientchambre ?chambre .
+}
+# Donner les noms des services hospitaliers et leurs chambres
+SELECT ?service ?chambre
+WHERE {
+  ?service a :Service_hospitalier .
+  ?service :contientchambre ?chambre .
+}
 # Trouver les noms des médecins avec leur spécialité
 PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
 
@@ -27,7 +31,12 @@ WHERE {
            h:NoM ?NoM ;
            h:assigné ?lit .
 }
-
+#les nom des patient 
+SELECT ?patient ?nom
+WHERE {
+  ?patient a :Patient ;
+           :NoM ?nom .
+}
 # Trouver les médecins travaillant dans un service spécifique
 PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
 
@@ -38,15 +47,7 @@ WHERE {
           h:travailleDans h:Urgences .
 }
 
-# Lister tous les lits dans une chambre spécifique
-PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
 
-SELECT ?lit
-WHERE {
-  ?chambre a h:Chambre ;
-        h:numéro "121" ;
-        h:aLit ?lit .
-}
 
 # Afficher les mises à jour médicales pour un patient donné
 PREFIX h: <http://www.semanticweb.org/mabrouka/ontologies/2025/3/hopital#>
